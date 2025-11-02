@@ -1,0 +1,135 @@
+'''
+Lab Assignment 03
+Md. Bokhtiar Rahman Juboraz
+Id: 20301138
+Section: 09
+'''
+
+#1. classes:
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next_ref = None
+        self.pre_ref = None
+
+# 2. 2nd Class
+class DoublyList:
+    def __init__(self):
+        self.head = None
+
+        self.size = 0
+
+#3. Insertion at end:
+    def insert(self, newElement):
+        self.size += 1
+        nN = Node(newElement)
+        if self.head is None:
+            self.head = nN
+        else:
+            nH = self.head
+            while nH.next_ref is not None:
+                nH = nH.next_ref
+            nH.next_ref = nN
+            nN.pre_ref = nH
+            
+            
+#4. insertion at index:
+    def insertAtIndex(self, newElement, index):
+        self.size += 1
+        if self.head is not None:
+            node_position = index + 1
+            nN = Node(newElement)
+
+            if node_position > 1:
+                nH = self.head
+                for i in range(1, node_position - 1):  # from the previous Node
+                    if nH is not None:
+                        nH = nH.next_ref
+                if nH is not None:
+                    nN.next_ref = nH.next_ref
+                    nH.next_ref = nN
+
+            elif node_position == 1:
+                nN.next = self.head
+                self.head = nN
+
+            else:
+                print("\n Invalid Index")
+
+
+
+#5. remove given index:
+    def removeKey(self, index):
+        self.size -= 1
+        nH = self.head  # storing the head node
+        count = 1
+        self.size -= 1
+        if nH == None or index <= 0:
+            return
+
+        while nH is not None and count < index:
+            nH = nH.next_ref
+            count += 1
+
+        if nH == None:
+            return
+
+        return nH
+
+
+
+
+#6. remove given deleteKey 
+    def remove(self, deletekey):
+        self.size -= 1
+        if self.head is not None:
+
+            if deletekey == self.head.data:
+                self.head = self.head.next_ref
+                self.head = None
+                return
+
+        new = self.head
+        while new is not None:
+            if new.data == deletekey:
+                print("Removed:", deletekey)
+                break
+            n1 = new
+            new = new.next_ref
+
+        if (self.head == None):
+            return
+        n1.next_ref = new.next_ref
+
+
+
+
+
+#printing data:
+
+    def showList(self):
+
+        if self.head is not None:
+            nH = self.head
+            while nH is not None:
+                print(nH.data, ">", end=" ")
+                nH = nH.next_ref
+        else:
+            print("empty List")
+        print("   size of the list: ", self.size)
+
+
+list1 = DoublyList()
+list1.insert(1)
+list1.insert(2)
+list1.insert(3)
+print("inserted List: ")
+list1.showList()
+print("inserting in given index:")
+list1.insertAtIndex(50, 2)
+list1.showList()
+list1.removeKey(1)
+print('after deleting given index: ')
+list1.showList()
+list1.remove(2)
+list1.showList()

@@ -1,0 +1,259 @@
+Md. Bokhtiar Rahman Juboraz
+ID : 20301138
+Section: 09
+Assignment : 01
+
+Answer 1:
+
+source = [10,20,30,40,50,60]     #original Array
+k = 3                            #position
+size= len(source)
+
+
+def shiftLeft(source, size, k):
+    array1= []
+    array2= [0]*size
+    e1=0
+    
+    while (e1 < k < size):
+        array1.append(source[e1])
+        source[e1] = source[k]
+        e1 = e1 + 1
+        k = k + 1
+    
+    source2 = source[:e1] + array2[e1:size]
+    return source2
+
+    
+
+print(shiftLeft(source, size, k))
+
+
+
+
+
+
+
+
+Answer 2:
+
+source = [10,20,30,40,50,60]     #original Array
+k = 3                            #position
+size= len(source)
+
+
+
+def rotateLeft(source, size, k):
+    array1= []
+    e1=0
+    while (e1 < k< size):
+        array1.append(source[e1])
+        source[e1] = source[k]
+        e1 = e1 + 1
+        k = k + 1
+    source2 = source[:e1] + array1
+    return source2
+        
+    
+    
+
+print(rotateLeft(source, size, k))
+
+
+
+
+
+Answer 3:
+
+source = [10,20,30,40,50,60]     #original Array
+k = 3                            #position
+size= 5
+
+
+def rotateLeft(source, size, k):
+    array1= []
+    rest= []
+    e1=0
+    k2 = k-1
+    size2 = size-1
+    null = [0]*(size-k2)
+    
+    while (e1 < k2 < size2):
+        array1.append(source[e1])
+        e1 = e1 + 1
+        k2 = k2 + 1
+    while (e1 > k2  < size2):
+        rest.append(source[e1])
+        e1 = e1 + 1
+        k2 = k2 + 1
+        
+    array3 = array1 + rest +  null
+    return array3
+   
+        
+    
+
+print(rotateLeft(source, size, k))
+
+
+
+
+
+
+
+
+
+
+
+Answer 4 :
+
+source = [10,20,30,40,50,60]     #original Array
+k = 3                            #position
+size= 5
+
+
+
+
+
+Answer 5:
+array1 = [4,  1, 1, 4, 1,1]
+len = len(array1)
+def Point1(array1, len):
+    sum1 = 0
+    for i in range(0, len):
+        sum1 += array1[i]
+        sum2 = 0
+        for j in range(i + 1, len):
+            sum2 += array1[j]
+        if (sum1 == sum2):
+            return i + 1
+    return -1
+
+
+def print2(array1, len):
+    cut = Point1(array1, len)
+    if (cut == -1 or cut == len):
+        print("false")
+        return
+    for i in range(0, len):
+        if (cut == i):
+            print("True")
+
+
+print2(array1, len)
+
+
+
+
+
+
+
+
+Answer 6:
+
+
+Answer 7:
+
+array1 = [1,1,2, 2, 1, 1,1,1,1]
+
+def checkvalue(array1):
+    crawl = 1
+    num1 = 1
+
+
+    for i in range(1,len(array1)):
+        idx1 = i -1
+        if array1[i] == array1[idx1]:
+            crawl = crawl + 1
+        else :
+            crawl = 1
+            num1 = max(num1,crawl)
+    maximum = max(num1,crawl)
+    print(maximum)
+
+
+checkvalue(array1)
+
+
+
+
+
+
+Answer 8:
+
+arr1 = [4,5,6,6,4,3,6,4]
+
+
+
+def check_ele(array1):
+    
+    dict1 = dict()
+    list1 = []
+    for i in array1:
+
+        if i in dict1:
+            dict1[i] += 1
+
+        else:
+            dict1[i] = 1
+
+
+    for i in dict1:
+
+        if dict1[i] > 1:
+            list1.append(dict1[i])
+
+    len1 = len(list1)
+
+    for i in range(len1):
+        for k in range(len1):
+            if list1[i] == list1[k] and  i != k:
+                return True
+
+    else:
+        return False
+
+
+print(check_ele(arr1))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tast 2
+Intersection:
+
+arr1 = [40, 50, 0, 0, 0, 10, 20, 30]
+start1 = 5
+size1 = 5
+arr2 = [10, 20, 5, 0, 0, 0, 0, 0, 55, 40, 15, 25]
+start2 = 8
+size2 = 7
+
+
+def intersection(arr1, arr2, start1, start2, size1, size2):
+    newarr = []
+    len1 = start1*2
+    len2 = start2*2
+    for i in range(start1, len1):
+
+        for y in range(start2, len2):
+
+            if arr1[i % len(arr1)] == arr2[y % len(arr2)]:
+                newarr.append(arr1[i % len(arr1)])
+
+    out1 = sorted(set(newarr), key=newarr.index)
+
+    return out1
+
+
+print(intersection(arr1, arr2, start1, start2, size1, size2))

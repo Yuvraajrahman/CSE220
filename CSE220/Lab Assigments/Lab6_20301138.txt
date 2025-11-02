@@ -1,0 +1,285 @@
+
+
+'''
+CSE220 FALL 21
+Assignment : 6
+Md. Bokhtiar Rahman Juboraz
+ID: 20301138
+Section: 09
+'''
+
+print("Answer 01\n")
+
+#sort recursively using selection sort.
+
+def index1(arr1,srt,len1):
+    min = srt
+    for i in range(srt,len1):
+        if arr1[i] < arr1[min]:
+            min = i
+    return min
+
+def selectsort(a,i,j):
+    if i < j:
+        min = index1(a,i,j)
+        a[i],a[min] = a[min],a[i]
+        selectsort(a,i+1,j)
+    return a
+    
+arr = [2,65,7,8,4,]
+print("original array: ",arr)
+print('sorted array',selectsort(arr,0,len(arr)))
+
+print("\nAsnwer 02\n")
+# sort recursively using insertion sort algorithm
+def insrtSort(a1, len1):
+    if len1>1:
+        nxt_len = len1-1
+        insrtSort(a1, nxt_len)
+        end1 = a1[nxt_len]
+        ind1 = nxt_len-1
+        
+        while ind1>=0 and a1[ind1]>end1:
+            a1[ind1+1] = a1[ind1]
+            ind1-=1
+            
+        a1[ind1+1] = end1
+    else:
+        return
+        
+def printArray(a1,len1):
+    for i in range(len1):
+        print(a1[i],end=" ")
+    
+        
+a1 = [3,5,7,4,9,10]
+print("original array: \n",a1)
+
+insrtSort(a1, len(a1))
+print('sorted array')
+printArray(a1, len(a1))
+print("\n")        
+        
+        
+        
+print("Answer 03\n")
+
+
+class Node1:
+    def __init__(self, data=None, nxt=None):
+        self.data=data
+        self.nxt=nxt
+
+
+    def __str__(self):
+        return str(self.data)
+
+class mylist2:
+    def __init__(self, fst=None,n1=0):
+        self.fst=fst
+        self.n1=n1 
+        
+    def insert(self, data=None):
+    
+        node=Node1(data)
+        node.nxt=self.fst
+        self.fst=node
+        self.n1=self.n1+1
+
+
+    
+    def bubblesort(self):
+        for i in range(self.n1-1):
+            
+            pre=self.fst
+            nxt=pre.nxt
+            last=None
+            
+            while nxt:
+                if pre.data<nxt.data:
+                    last=pre
+                    pre=nxt
+                    nxt=nxt.nxt
+                    
+                else:           
+                    if last==None:
+                       last=pre.nxt
+                       nxt=nxt.nxt
+                       last.nxt=pre
+                       pre.nxt=nxt
+                       self.fst=last
+                       
+                    else:   
+                        temp=nxt
+                        nxt=nxt.nxt
+                        last.nxt=pre.nxt
+                        last=temp
+                        temp.nxt=pre
+                        pre.nxt=nxt
+                    
+            i=i+1             
+           
+    def showlist(self):
+        out1 =self.fst
+        while out1:
+            print(out1, end=' ')
+            out1=out1.nxt
+    print()        
+           
+Linked1= mylist2()
+
+
+l2 = [2,7,3,9,5]
+size1 =  len(l2)
+
+for i in range (size1):
+    Linked1.insert(l2[i])
+    i = i +1
+print("original list: ",)
+Linked1.showlist()
+print()
+Linked1.bubblesort()
+print("the sorted list: ")
+Linked1.showlist()
+print()
+
+print("\nAnswer 04\n")
+
+
+
+class Node2:
+    def __init__(self, data=None, nxt=None):
+        self.data=data
+        self.nxt=nxt
+
+
+    def __str__(self):
+        return str(self.data)
+
+class mylist2:
+    def __init__(self, fst=None,n1=0):
+        self.fst=fst
+        self.n1=n1 
+        
+    def insert(self, data=None):
+    
+        node=Node2(data)
+        node.nxt=self.fst
+        self.fst=node
+        self.n1=self.n1+1
+
+
+    def selectionSort(self):
+        
+        new = self.fst
+        
+        
+        while (new):
+            
+            n3 = new
+            nxt2 = new.nxt
+
+            while (nxt2):
+                if (n3.data > nxt2.data):
+                    n3 = nxt2
+                
+                nxt2 = nxt2.next
+
+            new2 = new.data
+            new.data = n3.data
+            n3.data = new2
+            new = new.nxt
+
+
+           
+           
+    def showlist(self):
+        out1 =self.fst
+        print("sorted list: ")
+        while out1:
+            print(out1, end=' ')
+            out1=out1.nxt
+    print()        
+           
+Linked1= mylist2()
+
+
+l2 = [9,7,5,2,1]
+size1 =  len(l2)
+
+for i in range (size1):
+    Linked1.insert(l2[i])
+    i = i +1
+
+print("given list: \n",l2)
+Linked1.showlist()
+print()
+
+print("\nanswer 06\n")
+
+# Implement binary search algorithm RECURSIVELY.
+
+def binsearch(a1, x): 
+    fst1 = 0
+    lst1 = len(a1) -1 
+
+    if x is not None:
+    
+        while fst1 <= lst1: 
+            
+            mid_point = (lst1 + fst1) // 2 
+
+            if a1[mid_point] > x:
+                lst1 = mid_point -1
+                
+            elif a1 [mid_point] < x: 
+                fst1 = mid_point+1
+            else:
+                return mid_point
+            
+        return -1
+    else: 
+        print("Invalid input")
+
+l1 = [5,7,2,65,3,9,4,6,8]
+search1 = int(3)
+print("serach for: '",search1,"' in ",l1)
+idx1 = binsearch(l1,search1)
+
+if idx1 == -1:
+    print("invalid input")
+else:
+    print("found at index: ",idx1)
+    
+print("\nAnswer 07\n")
+
+#Implement a recursive algorithm to find the n-th Fibonacci number using memoization 
+
+
+def find_fib(n,l1):
+    if n <=1:
+        return n 
+    n1= 0
+    n2= 0
+    
+    if l1[n-1] != -1:
+        n1 = l1[n-1]
+    else:
+        n1 = find_fib(n-1)
+        
+    if l1[n-2] != -1:
+        n2 = l1[n-2]
+    else:
+        n2 = find_fib(n-2)
+    l1[n] = n1 + n2
+    
+    return l1[n]
+
+l1 = []
+for i in range(100):
+    l1.append(i)
+    
+
+n = 4
+print('finding fibonacci number of: ',n)
+print("result: ",find_fib(n,l1))

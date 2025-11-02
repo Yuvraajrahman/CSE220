@@ -1,0 +1,254 @@
+'''LAB ASSIGNMENT: 05
+Name: Md. Bokhtiar Rahman Juboraz
+ID: 20301138
+SECTION: 09'''
+
+
+#1(a):
+
+def factorial(n): 
+
+    if n == 0:
+        return 1
+    fact = n * factorial(n-1)
+    return fact
+
+num = 5
+print("factorial of ",num," is ", factorial(num))
+print("\n")
+
+
+#1(b):
+
+def fibonacci(n):
+    if n >=0:
+        if n==0:
+            return 0
+        elif n==1:
+            return 1
+        else:
+            return fibonacci(n-1)+fibonacci(n-2)
+    else:
+        print("enter number 0 or greater")
+
+
+num = int(9);
+print(fibonacci(num))
+print("\n")
+
+
+#1(c):
+
+def recurse(a,len1):
+       
+    if len1 < 0:
+        return;
+    else:
+        print(a[len1])
+        return recurse(a,len1-1)
+    
+    
+a =[50,40,30,20,10]
+len1 = len(a)-1
+recurse(a,len1)
+print("\n")
+
+
+#1(d):
+
+def power(num, pow):
+    if pow >=0 : 
+    
+        if (pow == 0): 
+            return 1
+    
+        return num * power(num,pow-1)
+    else:
+        return "enter non negative integer"
+        
+num = int(5); pow = int(3)
+print(power(num, pow))
+print("\n")
+
+
+#2(a):
+
+def find( num ):
+    if num >= 0:
+        if num == 0:
+            return 0
+        else:
+            bin1 = int(num % 2 + 10 * find(num // 2))
+            return bin1
+    else: 
+        return "enter non negative integer"
+
+num = int(8)
+print(find(num))
+print("\n")
+
+
+#2(b):
+
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+  
+
+def push(head, data):
+    if head is None:
+        return Node(data)
+    
+    else: 
+        n_node = Node(data)
+        n_node.next = head
+        head = n_node
+        return head
+
+
+def summation(head):
+    if (head == None):
+        return 0
+    
+    else: 
+        sum = head.data + summation(head.next)
+        return sum
+    
+
+n1 = None
+n1 = push(n1, 3)
+n1 = push(n1, 2)
+n1 = push(n1, 1)
+print("Sum = ", (summation(n1))) #answer
+print("\n")
+
+
+#2(c):
+
+def rev(head):
+    if(head == None):
+        return 0
+    else: 
+        print(head.data)
+        return rev(head.next)
+
+rev(n1) #answer
+print("\n")
+
+
+#3:
+def hocBuilder(floor):
+    first_floor = 8
+    new_floor = 5
+    if floor==0:
+        return 0
+    
+    elif floor==1:
+        return first_floor
+    
+    else :
+        total = (new_floor +hocBuilder(floor-1))
+        
+        return total
+
+
+print("number of cards: ",hocBuilder(0))
+print("number of cards: ",hocBuilder(1))
+print("number of cards: ",hocBuilder(2))
+print("number of cards: ",hocBuilder(3)) #answer
+print("\n")
+
+
+#4(a):
+
+def count(count1):
+    if(count1 > 0):
+        
+        print(count1, end=" ")
+        count(count1-1)
+
+def trig(n1):
+    if (n1==0):
+        return
+    else: 
+        numbers = n1 -1
+        count(numbers)
+        gap(n1)
+        print("\n")
+        n2 = n1 -1
+        trig(n2)
+        
+        
+def gap(gap1):
+    if(gap1 == 0):
+        return;
+    gap(gap1-1)
+    print(end=" ")
+trig(5)
+
+
+print("\n")
+
+
+
+#4(b):
+
+def count(count1):
+    if(count1 > 0):
+        count(count1-1)
+        print(count1, end=" ")
+
+
+def trig(n1):
+    if (n1==0):
+        return
+    else: 
+        numbers = n1 -1
+        count(numbers)
+        gap(n1)
+        print("\n")
+        n2 = n1 -1
+        trig(n2)
+        
+        
+def gap(gap1):
+    if(gap1 == 0):
+        return;
+
+    print(" ",end=" ")
+    gap(gap1-1)
+
+trig(5)
+
+
+print("\n")
+
+
+
+#5:
+
+class FinalQ:
+    def print(self,array,idx):
+        if idx in range(len(array)):
+            profit = self.calcProfit(array[idx])
+            print("Investment:",  array[idx] , end="; " )
+            print("Profit:", profit)
+            print("\n")
+            self.print(array, idx+1)
+
+    def calcProfit(self,investment):
+        if investment <= 25000:
+            return 0
+        
+        else:
+            n1 = investment-100000
+            n2 = n1 / 100
+            n3 = n2*8
+            amount = n3 + 3375.0
+            return amount
+
+
+array = [25000,100000,250000,350000]
+f = FinalQ()
+f.print(array, 0)
