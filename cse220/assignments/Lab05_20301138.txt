@@ -1,0 +1,163 @@
+''' CSE220 SUMMER-22
+    LAB ASSIGNMENT 05
+    ID: 20301138'''
+
+class stack_array:
+    def __init__(self):
+        self.arr1 = []
+        self.count = 0
+    
+    def isempty(self):
+        return self.arr1 == []
+    
+    def showStack(self):
+        print(self.arr1)
+        
+    def push(self, ele):
+        self.count += 1
+        self.arr1.append(ele)
+        
+        
+    def pop(self):
+        
+        if self.arr1 is not self.isempty():
+            lastEle = self.arr1[-1]
+            del(self.arr1[-1])
+            self.count -=1
+            return lastEle
+        else:
+            return('stack underflow')
+        
+        
+        
+    def checklist(self, str):
+        for i in str:
+            if i == "(":
+                self.push(i)
+            elif i == "{":
+                self.push(i)
+            elif i == "[":
+                self.push(i)
+            elif i == ")":
+                self.pop()  
+            elif i == "}":
+                self.pop()     
+            elif i == "]":
+                self.pop()
+                        
+        if self.count == 0:
+            print("This expression is correct.")
+        else:
+            print("This expression is NOT correct.") 
+            print("\n error at character: ", self.arr1[-1])
+    
+stack1 = stack_array()
+str1 = '1+2*[3*3+{4-5(6(7/8/9)+10)}-11+(12*8)/{13+13}]+14'
+print(str1)
+
+stack1.checklist(str1)
+    
+        
+        
+#Linked list implementations: 
+
+class Node:
+    
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+        
+   
+class Stack:
+    
+ 
+    def __init__(self):
+        self.head = None
+        self.c2 = 0
+
+    def check_emp(self):
+        if self.head == None:
+            return True
+        else:
+            return False
+     
+
+    def push(self,data):
+        
+        self.c2 += 1
+         
+        if self.head == None:
+            self.head=Node(data)
+             
+        else:
+            nnode = Node(data)
+            nnode.next = self.head
+            self.head = nnode
+
+
+    def pop(self):
+        self.c2 -= 1
+         
+        if self.check_emp():
+            return None
+        else:
+            pnode = self.head
+            self.head = self.head.next
+            pnode.next = None
+            return pnode.data
+     
+  
+    def peek(self):
+        if self.check_emp():
+            return None     
+        else:
+            return self.head.data
+    
+    
+    def showlinkedliststack(self):
+            
+        nnode = self.head
+        if self.head is not None:
+            
+            while(nnode != None):
+                
+                print(nnode.data,"->",end = " ")
+                nnode = nnode.next
+            return
+        
+
+    def checklist(self, str):
+        
+        for i in str:
+            if i == "(":
+                self.push(i)
+            elif i == "{":
+                self.push(i)
+            elif i == "[":
+                self.push(i)
+            elif i == ")":
+                self.pop()  
+            elif i == "}":
+                self.pop()     
+            elif i == "]":
+                self.pop()
+                    
+        if self.c2 == 0:
+            print("This expression is correct.")
+        else:
+            print("This expression is NOT correct.") 
+            print("\n Error at character: ", self.peek())
+    
+        
+        
+
+stack2 = Stack()
+str2 = "1+2*[3*3+{4-5(6(7/8/9)+10)}-11+(12*8)/{13+13}]+14"
+c2 = 0
+
+
+print(str2)
+stack2.checklist(str2)
+
+
+ 

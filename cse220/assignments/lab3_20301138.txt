@@ -1,0 +1,315 @@
+#lab3 cse220 summer-22
+#ID : 20301138
+
+class Node:
+    def __init__(self, e, n):
+        self.element = e
+        self.next = n
+
+
+
+
+
+class LinkedList:
+  def __init__(self, a):
+   
+        self.head = None
+       
+        if type(a) == LinkedList:
+            self.head = a.head
+            
+        if type(a) == list:
+            i = 0
+            while(i < len(a)):
+                self.insert(a[i], i)
+                i += 1
+  
+  # # Count the number of nodes in the list
+  def countNode(self):
+        # To Do
+        count = 0
+        n = self.head
+        while n is not None:
+            count += 1
+            n = n.next
+        return count
+
+
+
+
+  # # Print elements in the list
+  def printList(self):
+    if self.head is not None:
+
+        print(self.head.element, end= "")
+        n = self.head.next
+        while n is not None :
+            print(", ", n.element, end= "")
+            n = n.next
+        print()
+        
+
+
+
+
+  # returns the reference of the Node at the given index. For invalid index return None.
+  def nodeAt(self, idx):
+    n = self.head
+    count = 0
+    while n is not None:
+      if count == idx:
+        return n
+        # print(n.element)
+      count += 1
+      n= n.next
+      
+
+
+  
+  # returns the element of the Node at the given index. For invalid idx return None.
+  def get(self, idx):
+    n = self.head
+    count = 0
+    while n is not None:
+      if count == idx:
+        return n.element
+      
+        
+      count += 1
+      n= n.next
+
+
+  def set(self, idx, elem): 
+    n2 = self.get(idx)  
+    n = self.head
+    count = 0
+    while n is not None:
+      if count == idx:
+        n.element = elem
+      count += 1
+      n= n.next
+    return n2
+
+  def indexOf(self, elem):
+    n = self.head
+    count = 0
+    while n is not None:
+      if n.element == elem:
+        p = count
+      else:
+        p = -1
+      count += 1
+      n= n.next
+    return p
+    
+    
+
+  def contains(self, elem):
+    n = self.head
+    count = 0
+    while n is not None:
+      if n.element == elem:
+        p = True
+      else:
+        p = False
+      count += 1
+      n= n.next
+    return p
+
+
+  def copyList(self):
+    n = self.head
+    list1 = []
+    while n is not None:
+          list1.append(n.element)
+          n=n.next
+    
+    return list1
+          
+  
+  def reverseList(self):
+    copy1 = LinkedList(None)
+    count1 = 0
+    count2 = self.countNode() - 1
+    copy1.head = None
+
+    while(count2 >= 0):
+        n = self.nodeAt(count2)
+        copy1.insert(n.element, count1)
+        count2 -= 1
+        count1 += 1
+    return copy1
+
+ 
+  def insert(self, elem, idx):
+
+        count = 0
+        nnode = Node(elem, None)
+        if idx == 0 :
+            nnode.next = self.head
+            self.head = nnode
+            return
+        
+        n = self.head
+        while n is not None:
+            if count == idx-1 :
+                nnode.next = n.next
+                n.next = nnode
+                return
+            count += 1
+            n = n.next
+         
+   
+
+  def remove(self, idx):
+        count = 0
+        n = self.head
+        if idx == 0:
+            ele1 = self.head.element
+            self.head = self.head.next
+            return ele1
+
+        
+        while n is not None:
+            if count == idx-1:
+                ele1 = n.next.element
+                n.next = n.next.next
+                return ele1
+            count += 1
+            n = n.next
+  
+ 
+  def rotateLeft(self):
+        count = 0
+        n = self.head
+        re_head = self.remove(0)
+        while n is not None:
+            count += 1
+            n = n.next
+        
+        self.insert(re_head, count)
+
+
+  
+  
+ 
+  def rotateRight(self):
+        point_last = self.remove(self.countNode()-1)
+        self.insert(point_last, 0)
+        
+        
+        
+        
+        
+        
+        
+print("////// Test 01 //////")
+a1 = [10, 20, 30, 40]
+h1 = LinkedList(a1) # Creates a linked list using the values from the array
+# head will refer to the Node that contains the element from a[0]
+
+h1.printList() # This should print: 10,20,30,40
+print(h1.countNode()) # This should print: 4
+
+print("////// Test 02 //////")
+# returns the reference of the Node at the given index. For invalid idx return None.
+myNode = h1.nodeAt(1)
+print(myNode.element) # This should print: 20. In case of invalid index This will generate an Error.
+    
+print("////// Test 03 //////")
+# returns the element of the Node at the given index. For invalid idx return None.
+val = h1.get(2)
+print(val) # This should print: 30. In case of invalid index This will print None.
+    
+    
+print("////// Test 04 //////")
+    
+# updates the element of the Node at the given index. 
+# Returns the old element that was replaced. For invalid index return None.
+# parameter: index, element
+         
+print(h1.set(1,85)) # This should print: 20
+h1.printList() # This should print: 10,85,30,40.
+print(h1.set(15,85)) # This should print: None
+h1.printList() # This should print: 10,85,30,40. 
+
+print("////// Test 05 //////")
+# returns the index of the Node containing the given element.
+# if the element does not exist in the List, return -1.
+index = h1.indexOf(40)
+print(index) # This should print: 3. In case of element that doesn't exists in the list this will print -1.
+print()
+print("////// Test 06 //////")
+# returns true if the element exists in the List, return false otherwise.
+ask = h1.contains(40)
+print(ask) # This should print: True.
+    
+    
+print("////// Test 07 //////")
+a2 = [10,20,30,40,50,60,70]
+h2 = LinkedList(a2) # uses theconstructor where a is an built in list
+h2.printList() # This should print: 10,20,30,40,50,60,70. 
+print() 
+# Makes a duplicate copy of the given List. Returns the head reference of the duplicate list.
+copyH=h2.copyList() # Head node reference of the duplicate list
+h3 = LinkedList(copyH) # uses the constructor where a is head of a linkedlist 
+h3.printList() # This should print: 10,20,30,40,50,60,70.  
+    
+print("////// Test 08 //////")
+a4 = [10,20,30,40,50]
+h4 = LinkedList(a4) # uses theconstructor where a is an built in list
+h4.printList() # This should print: 10,20,30,40,50.  
+# Makes a reversed copy of the given List. Returns the head reference of the reversed list.
+revH=h4.reverseList() # Head node reference of the reversed list
+h5 = LinkedList(revH) # uses the constructor where a is head of a linkedlist 
+h5.printList() # This should print: 50,40,30,20,10.  
+    
+print("////// Test 09 //////")
+a6 = [10,20,30,40]
+h6 = LinkedList(a6) # uses theconstructor where a is an built in list
+h6.printList() # This should print: 10,20,30,40.  
+    
+# inserts Node containing the given element at the given index. Check validity of index.
+h6.insert(85,0)
+h6.printList() # This should print: 85,10,20,30,40.  
+h6.insert(95,3)
+h6.printList() # This should print: 85,10,20,95,30,40.  
+h6.insert(75,6)
+h6.printList() # This should print: 85,10,20,95,30,40,75. 
+    
+    
+    
+print("////// Test 10 //////")
+a7 = [10,20,30,40,50,60,70]
+h7 = LinkedList(a7) # uses theconstructor where a is an built in list
+h7.printList() # This should print: 10,20,30,40,50,60,70.  
+    
+# removes Node at the given index. returns element of the removed node.
+# Check validity of index. return None if index is invalid.
+    
+print("Removed element:",h7.remove(0)) # This should print: Removed element: 10
+h7.printList() # This should print: 20,30,40,50,60,70.  
+print("Removed element: ",h7.remove(3)) # This should print: Removed element: 50
+h7.printList() # This should print: 20,30,40,60,70.  
+print("Removed element: ",h7.remove(4)) # This should print: Removed element: 70
+h7.printList() # This should print: 20,30,40,60. 
+    
+    
+print("////// Test 11 //////")
+a8 = [10,20,30,40]
+h8 = LinkedList(a8) # uses theconstructor where a is an built in list
+h8.printList() # This should print: 10,20,30,40.  
+    
+# Rotates the list to the left by 1 position.
+h8.rotateLeft()
+h8.printList() # This should print: 20,30,40,10.  
+    
+    
+print("////// Test 12 //////")
+a9 = [10,20,30,40]
+h9 = LinkedList(a9) # uses theconstructor where a is an built in list
+h9.printList() # This should print: 10,20,30,40.  
+    
+# Rotates the list to the right by 1 position.
+h9.rotateRight()
+h9.printList() # This should print: 40,10,20,30.
